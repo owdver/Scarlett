@@ -13,9 +13,9 @@ async def addconnection(client,message):
             cmd, group_id = message.text.split(" ", 1)
         except:
             await message.reply_text(
-                "<b>Enter in correct format!</b>\n\n"
-                "<code>/connect groupid</code>\n\n"
-                "<i>Get your Group id by adding this bot to your group and use  <code>/id</code></i>",
+                "<b>Eɴᴛᴇʀ Iɴ Cᴏʀʀᴇᴄᴛ Fᴏʀᴍᴀᴛ!</b>\n\n"
+                "<code>/connect Gʀᴏᴜᴘ ɪᴅ</code>\n\n"
+                "<i>Gᴇᴛ Yᴏᴜʀ Gʀᴏᴜᴘ Iᴅ Bʏ Aᴅᴅɪɴɢ Tʜɪs Bᴏᴛ Tᴏ Yᴏᴜʀ Gʀᴏᴜᴘ Aɴᴅ Usᴇ  <code>/id</code></i>",
                 quote=True
             )
             return
@@ -30,12 +30,12 @@ async def addconnection(client,message):
             and st.status != "creator"
             and str(userid) not in ADMINS
         ):
-            await message.reply_text("You should be an admin in Given group!", quote=True)
+            await message.reply_text("Yᴏᴜ Sʜᴏᴜʟᴅ Bᴇ Aɴ Aᴅᴍɪɴ Iɴ Gɪᴠᴇɴ Gʀᴏᴜᴘ!", quote=True)
             return
     except Exception as e:
         print(e)
         await message.reply_text(
-            "Invalid Group ID!\n\nIf correct, Make sure I'm present in your group!!",
+            "Iɴᴠᴀʟɪᴅ Gʀᴏᴜᴘ ɪᴅ!\n\nIғ Cᴏʀʀᴇᴄᴛ, Mᴀᴋᴇ Sᴜʀᴇ I'ᴍ Pʀᴇsᴇɴᴛ Iɴ Yᴏᴜʀ Gʀᴏᴜᴘ!!",
             quote=True,
         )
 
@@ -49,26 +49,26 @@ async def addconnection(client,message):
             addcon = await add_connection(str(group_id), str(userid))
             if addcon:
                 await message.reply_text(
-                    f"Sucessfully connected to **{title}**\nNow manage your group from my pm !",
+                    f"Sᴜᴄᴇssғᴜʟʟʏ Cᴏɴɴᴇᴄᴛᴇᴅ Tᴏ **{title}**\nNᴏᴡ Mᴀɴᴀɢᴇ Yᴏᴜʀ Gʀᴏᴜᴘ Fʀᴏᴍ Mʏ Pᴍ !",
                     quote=True,
                     parse_mode="md"
                 )
                 if chat_type in ["group", "supergroup"]:
                     await client.send_message(
                         userid,
-                        f"Connected to **{title}** !",
+                        f"Cᴏɴɴᴇᴄᴛᴇᴅ Tᴏ **{title}** !",
                         parse_mode="md"
                     )
             else:
                 await message.reply_text(
-                    "You're already connected to this chat!",
+                    "Yᴏᴜ'ʀᴇ Aʟʀᴇᴅʏ Cᴏɴɴᴇᴄᴛᴇᴅ Tᴏ Tʜɪs Cʜᴀᴛ!",
                     quote=True
                 )
         else:
-            await message.reply_text("Add me as an admin in group", quote=True)
+            await message.reply_text("Aᴅᴅ Mᴇ As Aɴ Aᴅᴍɪɴ Iɴ Gʀᴏᴜᴘ", quote=True)
     except Exception as e:
         print(e)
-        await message.reply_text('Some error occured! Try again later.', quote=True)
+        await message.reply_text('Sᴏᴍᴇ Eʀʀᴏʀ Oᴄᴄᴜʀᴇᴅ! Tʀʏ Aɢᴀɪɴ Lᴀᴛᴇʀ.', quote=True)
         return
 
 
@@ -78,7 +78,7 @@ async def deleteconnection(client,message):
     chat_type = message.chat.type
 
     if chat_type == "private":
-        await message.reply_text("Run /connections to view or disconnect from groups!", quote=True)
+        await message.reply_text("Rᴜɴ /connections Tᴏ Vɪᴇᴡ Oʀ Dɪsᴄᴏɴɴᴇᴄᴛ Fʀᴏᴍ Gʀᴏᴜᴘs!", quote=True)
 
     elif chat_type in ["group", "supergroup"]:
         group_id = message.chat.id
@@ -93,9 +93,9 @@ async def deleteconnection(client,message):
 
         delcon = await delete_connection(str(userid), str(group_id))
         if delcon:
-            await message.reply_text("Successfully disconnected from this chat", quote=True)
+            await message.reply_text("Sᴜᴄᴄᴇssғᴜʟʟʏ Dɪsᴄᴏɴɴᴇᴄᴛᴇᴅ Fʀᴏᴍ Tʜɪs Cʜᴀᴛ", quote=True)
         else:
-            await message.reply_text("This chat isn't connected to me!\nDo /connect to connect.", quote=True)
+            await message.reply_text("Tʜɪs Cʜᴀᴛ Isɴ'ᴛ Cᴏɴɴᴇᴄᴛᴇᴅ Tᴏ Mᴇ!\nDᴏ /connect Tᴏ Cᴏɴɴᴇᴄᴛ.", quote=True)
 
 
 @Client.on_message(filters.private & filters.command(["connections"]))
@@ -105,7 +105,7 @@ async def connections(client,message):
     groupids = await all_connections(str(userid))
     if groupids is None:
         await message.reply_text(
-            "There are no active connections!! Connect to some groups first.",
+            "Tʜᴇʀᴇ Aʀᴇ Nᴏ Aᴄᴛɪᴠᴇ Cᴏɴɴᴇᴄᴛɪᴏɴs!! Cᴏɴɴᴇᴄᴛ Tᴏ Sᴏᴍᴇ Gʀᴏᴜᴘs Fɪʀsᴛ.",
             quote=True
         )
         return
@@ -127,7 +127,7 @@ async def connections(client,message):
             pass
     if buttons:
         await message.reply_text(
-            "Your connected group details ;\n\n",
+            "Yᴏᴜʀ Cᴏɴɴᴇᴄᴛᴇᴅ Gʀᴏᴜᴘ Dᴇᴛᴀɪʟs ;\n\n",
             reply_markup=InlineKeyboardMarkup(buttons),
             quote=True
         )
