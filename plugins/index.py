@@ -20,20 +20,20 @@ async def index_files(bot, query):
     _, raju, chat, lst_msg_id, from_user = query.data.split("#")
     if raju == 'reject':
         await query.message.delete()
-        await bot.send_message(int(from_user), f'Your Submission for indexing {chat} has been decliened by our moderators.', reply_to_message_id=int(lst_msg_id))
+        await bot.send_message(int(from_user), f'Yᴏᴜʀ Sᴜʙᴍɪssɪᴏɴ Fᴏʀ Iɴᴅᴇxɪɴɢ {chat} Hᴀs Bᴇᴇɴ Dᴇᴄʟɪᴇɴᴇᴅ Bʏ Oᴜʀ Mᴏᴅᴇʀᴀᴛᴏʀs.', reply_to_message_id=int(lst_msg_id))
         return
 
     if lock.locked():
-        return await query.answer('Wait until previous process complete.', show_alert=True)
+        return await query.answer('Wᴀɪᴛ Uɴᴛɪʟ Pʀᴇᴠɪᴏᴜs Pʀᴏᴄᴇss Cᴏᴍᴘʟᴇᴛᴇ.', show_alert=True)
     msg = query.message
 
-    await query.answer('Processing...⏳', show_alert=True)
+    await query.answer('Pʀᴏᴄᴇssɪɴɢ...⏳', show_alert=True)
     if int(from_user) not in ADMINS:
-        await bot.send_message(int(from_user), f'Your Submission for indexing {chat} has been accepted by our moderators and will be added soon.', reply_to_message_id=int(lst_msg_id))
+        await bot.send_message(int(from_user), f'Yᴏᴜʀ Sᴜʙᴍɪssɪᴏɴ Fᴏʀ Iɴᴅᴇxɪɴɢ {chat} Hᴀs Bᴇᴇɴ Aᴄᴄᴇᴘᴛᴇᴅ Bʏ Oᴜʀ Mᴏᴅᴇʀᴀᴛᴏʀs Aɴᴅ Wɪʟʟ Bᴇ Aᴅᴅᴇᴅ Sᴏᴏɴ.', reply_to_message_id=int(lst_msg_id))
     await msg.edit(
-        "Starting Indexing",
+        "Sᴛᴀʀᴛɪɴɢ Iɴᴅᴇxɪɴɢ",
         reply_markup = InlineKeyboardMarkup(
-            [[InlineKeyboardButton('Cancel', callback_data='index_cancel')]]
+            [[InlineKeyboardButton('Cᴀɴᴄᴇʟ', callback_data='index_cancel')]]
         )
     )
     try:
@@ -53,38 +53,38 @@ async def send_for_index(bot, message):
     try:
         await bot.get_messages(chat_id, last_msg_id)
     except:
-        return await message.reply('Make Sure That Iam An Admin In The Channel, if channel is private')
+        return await message.reply('Mᴀᴋᴇ Sᴜʀᴇ Tʜᴀᴛ Iᴀᴍ Aɴ Aᴅᴍɪɴ Iɴ Tʜᴇ Cʜᴀɴɴᴇʟ, Iғ Cʜᴀɴɴᴇʟ Is Pʀɪᴠᴀᴛᴇ')
     
     if message.from_user.id in ADMINS:
         buttons = [
             [
-                InlineKeyboardButton('Yes', callback_data=f'index#accept#{chat_id}#{last_msg_id}#{message.from_user.id}')
+                InlineKeyboardButton('Yᴇs', callback_data=f'index#accept#{chat_id}#{last_msg_id}#{message.from_user.id}')
             ],
             [
-                InlineKeyboardButton('close', callback_data='close_data'),
+                InlineKeyboardButton('Cʟᴏsᴇ', callback_data='close_data'),
             ]
             ]
         reply_markup = InlineKeyboardMarkup(buttons)
-        return await message.reply(f'Do you Want To Index This Channel?\n\nChat ID/ Username: <code>{chat_id}</code>\nLast Message ID: <code>{last_msg_id}</code>', reply_markup=reply_markup)
+        return await message.reply(f'Dᴏ Yᴏᴜ Wᴀɴᴛ Tᴏ Iɴᴅᴇx Tʜɪs Cʜᴀɴɴᴇʟ?\n\nCʜᴀᴛ ɪᴅ/ Usᴇʀɴᴀᴍᴇ: <code>{chat_id}</code>\nLᴀsᴛ Mᴇssᴀɢᴇ ɪᴅ: <code>{last_msg_id}</code>', reply_markup=reply_markup)
 
     if not message.forward_from_chat.username:
         try:
             link = (await bot.create_chat_invite_link(chat_id)).invite_link
         except ChatAdminRequired:
-            return await message.reply('Make sure iam an admin in the chat and have permission to invite users.')
+            return await message.reply('Mᴀᴋᴇ Sᴜʀᴇ Iᴀᴍ Aɴ Aᴅᴍɪɴ Iɴ Tʜᴇ Cʜᴀᴛ Aɴᴅ Hᴀᴠᴇ Tᴏ Pᴇʀᴍɪssɪᴏɴ Tᴏ Iɴᴠɪᴛᴇ Usᴇʀs.')
     else:
         link = f"@{message.forward_from_chat.username}"
     buttons = [
         [
-            InlineKeyboardButton('Accept Index', callback_data=f'index#accept#{chat_id}#{last_msg_id}#{message.from_user.id}')
+            InlineKeyboardButton('Aᴄᴄᴇᴘᴛ Iɴᴅᴇx', callback_data=f'index#accept#{chat_id}#{last_msg_id}#{message.from_user.id}')
         ],
         [
-            InlineKeyboardButton('Reject Index', callback_data=f'index#reject#{chat_id}#{message.message_id}#{message.from_user.id}'),
+            InlineKeyboardButton('Rᴇᴊᴇᴄᴛ Iɴᴅᴇx', callback_data=f'index#reject#{chat_id}#{message.message_id}#{message.from_user.id}'),
         ]
         ]
     reply_markup = InlineKeyboardMarkup(buttons)
-    await bot.send_message(LOG_CHANNEL, f'#IndexRequest\n\nBy : {message.from_user.mention}\nChat ID/ Username - <code> {chat_id}</code>\nLast Message ID - <code>{last_msg_id}</code>\nInviteLink - {link}', reply_markup=reply_markup)
-    await message.reply('ThankYou For the Contribution, Wait For My Moderators to verify the files.')
+    await bot.send_message(LOG_CHANNEL, f'#IɴᴅᴇxRᴇǫᴜᴇsᴛ\n\nBʏ : {message.from_user.mention}\Cʜᴀᴛ ɪᴅ/ Usᴇʀɴᴀᴍᴇ - <code> {chat_id}</code>\nLᴀsᴛ Mᴇssᴀɢᴇ ɪᴅ - <code>{last_msg_id}</code>\nIɴᴠɪᴛᴇ Lɪɴᴋ - {link}', reply_markup=reply_markup)
+    await message.reply('TʜᴀɴᴋYᴏᴜ Fᴏʀ Tʜᴇ Cᴏɴᴛʀɪʙᴜᴛɪᴏɴ, Wᴀɪᴛ Fᴏʀ Mʏ Mᴏᴅᴇʀᴀᴛᴏʀs Tᴏ Vᴇʀɪғʏ Tʜᴇ Fɪʟᴇs.')
         
         
 
