@@ -552,4 +552,4 @@ async def auto_filter(client, message):
         elif imdb:
             await message.reply_text(f"<b>Qᴜᴇʀʏ: {search}</b> \n‌‌‌‌Iᴍᴅʙ Dᴀᴛᴀ:\n\n🏷 Tɪᴛʟᴇ: <a href={imdb['url']}>{imdb.get('title')}</a>\n🎭 Gᴇɴʀᴇs: {imdb.get('genres')}\n📆 Yᴇᴀʀ: <a href={imdb['url']}/releaseinfo>{imdb.get('year')}</a>\n🌟 Rᴀᴛɪɴɢ: <a href={imdb['url']}/ratings>{imdb.get('rating')}</a> / 10", reply_markup=InlineKeyboardMarkup(btn))
         else:
-            await message.reply_text(f"<b>Here is What I Found In My Database For Your Query {search} ‌‌‌‌‎ </b>", reply_markup=InlineKeyboardMarkup(btn))
+            await message.reply_text(f"<b>Hᴇʀᴇ Is Wʜᴀᴛ I Fᴏᴜɴᴅ Iɴ Mʏ Dᴀᴛᴀʙᴀsᴇ Fᴏʀ Yᴏᴜʀ Qᴜᴇʀʏ {search} ‌‌‌‌‎ </b>", reply_markup=InlineKeyboardMarkup(btn))
