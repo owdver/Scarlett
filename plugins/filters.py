@@ -120,7 +120,7 @@ async def addfilter(client, message):
 async def get_all(client, message):
     
     chat_type = message.chat.type
-    userid = message.reply_to_message.from_user.id if message.from_user else None
+    userid = message.from_user.id if message.from_user else None
     if not userid:
         return await message.reply(f"Yᴏᴜ Aʀᴇ Aɴᴏɴʏᴍᴏᴜs Aᴅᴍɪɴ. Usᴇ /connect {message.chat.id} Iɴ Pᴍ")
     if chat_type == "private":
@@ -182,7 +182,7 @@ async def get_all(client, message):
         
 @Client.on_message(filters.command('del') & filters.incoming)
 async def deletefilter(client, message):
-    userid = message.reply_to_message.from_user.id if message.from_user else None
+    userid = message.from_user.id if message.from_user else None
     if not userid:
         return await message.reply(f"Yᴏᴜ Aʀᴇ Aɴᴏɴʏᴍᴏᴜs Aᴅᴍɪɴ. Usᴇ /connect {message.chat.id} Iɴ Pᴍ")
     chat_type = message.chat.type
