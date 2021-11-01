@@ -80,19 +80,27 @@ async def next_page(bot, query):
     if not search:
         await query.answer("Yᴏᴜ Aʀᴇ Usɪɴɢ Tʜɪs Fᴏʀ Oɴᴇ Oғ Mʏ Oʟᴅ Mᴇssᴀɢᴇ, Pʟᴇᴀsᴇ Sᴇɴᴅ Tʜᴇ Rᴇǫᴜᴇsᴛ Aɢᴀɪɴ.",show_alert=True)
         return
-    btn=[]
 
     files, n_offset, total = await get_search_results(search, offset=offset, filter=True)
     try:
         n_offset = int(n_offset)
     except:
         n_offset = 0
-    if files:
-        for file in files:
-            file_id = file.file_id
-            btn.append(
-                [InlineKeyboardButton(text=f"{file.file_name}", callback_data=f'files#{file_id}'), InlineKeyboardButton(text=f"{get_size(file.file_size)}", callback_data=f'files_#{file_id}')]
-                )
+    if not files:
+        return
+    btn = [
+        [
+            InlineKeyboardButton(
+                text=f"{file.file_name}", callback_data=f'files#{file.file_id}'
+            ),
+            InlineKeyboardButton(
+                text=f"{get_size(file.file_size)}",
+                callback_data=f'files_#{file.file_id}',
+            ),
+        ]
+        for file in files
+    ]
+   
     if 0 < offset <= 10:
         off_set = 0
     elif offset == 0:
@@ -522,18 +530,25 @@ async def cb_handler(client: Client, query: CallbackQuery):
 async def auto_filter(client, message):
     if re.findall("((^\/|^,|^!|^\.|^[\U0001F600-\U000E007F]).*)", message.text):
         return
-    if 2 < len(message.text) < 100:    
-        btn = []
+    if 2 < len(message.text) < 100:
+         
         search = message.text
         files, offset, total_results = await get_search_results(search.lower(), offset=0)
-        if files:
-            for file in files:
-                file_id = file.file_id
-                btn.append(
-                    [InlineKeyboardButton(text=f"{file.file_name}", callback_data=f'files#{file_id}'), InlineKeyboardButton(text=f"{get_size(file.file_size)}", callback_data=f'files_#{file_id}')]
-                    )
-        if not btn:
+        if not files:
             return
+         btn = [
+            [
+                InlineKeyboardButton(
+                    text=f"{file.file_name}",
+                    callback_data=f'files#{file.file_id}',
+                ),
+                InlineKeyboardButton(
+                    text=f"{get_size(file.file_size)}",
+                    callback_data=f'files_#{file.file_id}',
+                ),
+            ]
+            for file in files
+        ]
 
         if offset != "":
             key = f"{message.chat.id}-{message.message_id}"
