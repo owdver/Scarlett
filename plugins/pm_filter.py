@@ -546,19 +546,29 @@ async def auto_filter(client, message):
         files, offset, total_results = await get_search_results(search.lower(), offset=0)
         if not files:
             return
-        btn = [
-            [
-                InlineKeyboardButton(
-                    text=f"{file.file_name}",
-                    callback_data=f'files#{file.file_id}',
-                ),
-                InlineKeyboardButton(
-                    text=f"{get_size(file.file_size)}",
-                    callback_data=f'files_#{file.file_id}',
-                ),
+        if SINGLE_BUTTON:
+            btn = [
+                [
+                    InlineKeyboardButton(
+                        text=f"[{get_size(file.file_size)}] {file.file_name}", callback_data=f'files#{file.file_id}'
+                    ),
+                ]
+                for file in files
             ]
-            for file in files
-        ]
+        else:
+            btn = [
+                [
+                    InlineKeyboardButton(
+                        text=f"{file.file_name}",
+                        callback_data=f'files#{file.file_id}',
+                    ),
+                    InlineKeyboardButton(
+                        text=f"{get_size(file.file_size)}",
+                        callback_data=f'files_#{file.file_id}',
+                    ),
+                ]
+                for file in files
+            ]
 
         if offset != "":
             key = f"{message.chat.id}-{message.message_id}"
