@@ -78,7 +78,7 @@ async def addconnection(client,message):
 async def deleteconnection(client,message):
     userid = message.reply_to_message.from_user.id if message.from_user else None
     if not userid:
-        return await message.reply(f"Yᴏᴜ Aʀᴇ Aɴᴏɴʏᴍᴏᴜs Aᴅᴍɪɴ. Usᴇ /connect {message.chat.id} Iɴ Pᴍ"")
+        return await message.reply(f"Yᴏᴜ Aʀᴇ Aɴᴏɴʏᴍᴏᴜs Aᴅᴍɪɴ. Usᴇ /connect {message.chat.id} Iɴ Pᴍ")
     chat_type = message.chat.type
 
     if chat_type == "private":
