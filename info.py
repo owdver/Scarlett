@@ -29,5 +29,5 @@ DATABASE_NAME = environ.get('DATABASE_NAME', "Rajappan")
 COLLECTION_NAME = environ.get('COLLECTION_NAME', 'Telegram_files')
 LOG_CHANNEL = int(environ.get('LOG_CHANNEL', ''))
 
-SINGLE_BUTTON = eval((environ.get('SINGLE_BUTTON', "False")))
+SINGLE_BUTTON = bool((environ.get('SINGLE_BUTTON', False)))
 CUSTOM_FILE_CAPTION = environ.get("CUSTOM_FILE_CAPTION", None)
