@@ -536,7 +536,7 @@ async def auto_filter(client, message):
         files, offset, total_results = await get_search_results(search.lower(), offset=0)
         if not files:
             return
-         btn = [
+        btn = [
             [
                 InlineKeyboardButton(
                     text=f"{file.file_name}",
